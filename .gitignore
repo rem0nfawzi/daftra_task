@@ -2,3 +2,6 @@
 # next.js
 /frontend/.next/
 /frontend/out/
+
+# backend
+/backend/node_modules
