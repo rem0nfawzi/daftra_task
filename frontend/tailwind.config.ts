@@ -17,6 +17,12 @@ export default {
         secondary: {
           500: "#161616",
         },
+        gray: {
+          100: "#E9E9E9",
+          200: "#F7F7F7",
+          500: "#404040",
+          600: "#707070",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
