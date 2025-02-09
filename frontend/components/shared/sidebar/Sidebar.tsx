@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import SidebarItem from "./sidebar-item/SidebarItem";
 import { useNavigationStore } from "@/store/useNavigationStore";
-import SidebarItemEdit from "./sidebar-item-edit/SidebarItemEdit";
 import ActionBtns from "./action-btns/ActionBtns";
+import EditWrapper from "./edit-wrapper/EditWrapper";
 
 const Sidebar = () => {
   const { sidebarItems } = useNavigationStore();
@@ -38,15 +38,12 @@ const Sidebar = () => {
                   />
                 )
             )}
-
-          {isEditing &&
-            localItems.map((item) => (
-              <SidebarItemEdit
-                key={item.id}
-                item={item}
-                setLocalItems={setLocalItems}
-              />
-            ))}
+          {isEditing && (
+            <EditWrapper
+              localItems={localItems}
+              setLocalItems={setLocalItems}
+            />
+          )}
         </div>
       </div>
     </aside>
