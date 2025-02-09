@@ -64,7 +64,7 @@ const Sidebar = () => {
       );
   }, []);
   return (
-    <aside className={cn("w-[440px]")}>
+    <aside className={cn("w-[440px] bg-white")}>
       <div
         className={cn("fixed left-0 top-[98px] bottom-0 w-[440px] bg-white")}
       >

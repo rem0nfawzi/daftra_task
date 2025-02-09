@@ -7,7 +7,7 @@ import NavItems from "./nav-items/NavItems";
 
 const Header = () => {
   return (
-    <header className={cn("bg-secondary-500")}>
+    <header className={cn("bg-secondary-500 sticky top-0 z-10")}>
       <div
         className={cn(
           "flex justify-between items-center mx-auto h-[98px] max-w-[1744px]"
