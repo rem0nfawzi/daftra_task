@@ -1,8 +1,10 @@
-import { ReactElement } from "react";
-
+export const enum AttributeTypeEnum {
+  LOCATION = "LOCATION",
+  DATE = "DATE",
+}
 export interface Attribute {
   id: number;
-  icon: ReactElement;
+  type: AttributeTypeEnum;
   text: string;
 }
 export interface Job {

@@ -1,20 +1,29 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import ArrowBottom from "../../icons/ArrowBottom";
-import { SidebarItem as SidebarItemType } from "../Sidebar";
+import {
+  SidebarItem as SidebarItemType,
+  useNavigationStore,
+} from "@/store/useNavigationStore";
+import { useRouter } from "next/navigation";
 
-interface SidebarItemProps extends SidebarItemType {
-  handleClick: (id: number, url?: string) => void;
-}
-const SidebarItem: FC<SidebarItemProps> = ({
+const SidebarItem: FC<SidebarItemType> = ({
   id,
   text,
   isOpen,
   url,
   subItems,
-  handleClick,
 }) => {
+  const router = useRouter();
+  const { handleItemClick } = useNavigationStore();
+  const handleClick = useCallback(
+    (id: number, url?: string) => {
+      if (url) router.push(url);
+      else handleItemClick(id);
+    },
+    [handleItemClick, router]
+  );
   return (
     <>
       <button
