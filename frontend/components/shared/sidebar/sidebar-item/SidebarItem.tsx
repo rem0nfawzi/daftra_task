@@ -43,16 +43,19 @@ const SidebarItem: FC<SidebarItemType> = ({
       </button>
       {subItems && isOpen && (
         <div className="flex flex-col gap-3.5">
-          {subItems.map((item) => (
-            <button
-              key={item.id}
-              className={cn(
-                "text-gray-500 text-xl py-3 mx-6 px-6 rounded-sm text-left mb-3.5 transition hover:bg-gray-200"
-              )}
-            >
-              {item.text}
-            </button>
-          ))}
+          {subItems.map(
+            (item) =>
+              item.showItem && (
+                <button
+                  key={item.id}
+                  className={cn(
+                    "text-gray-500 text-xl py-3 mx-6 px-6 rounded-sm text-left mb-3.5 transition hover:bg-gray-200"
+                  )}
+                >
+                  {item.text}
+                </button>
+              )
+          )}
         </div>
       )}
     </>

@@ -1,61 +1,27 @@
 import { create } from "zustand";
+import { initialSidebarItems } from "./initialSidebarItems";
 
-export interface SidebarItem {
+export interface SidebarBaseItem {
   id: number;
   text: string;
   url?: string;
+  showItem: boolean;
+}
+export interface SidebarMainItem extends SidebarBaseItem {
   isOpen?: boolean;
-  subItems?: {
-    id: number;
-    text: string;
-    url: string;
-  }[];
+  subItems?: SidebarBaseItem[];
 }
 
 type NavigationStore = {
-  sidebarItems: SidebarItem[];
+  sidebarItems: SidebarMainItem[];
   handleItemClick: (id: number) => void;
+  saveItems: (newItems: SidebarMainItem[]) => void;
 };
-
-const initialSidebarItems: SidebarItem[] = [
-  {
-    id: 1,
-    text: "Dashboard",
-    url: "/dashboard",
-  },
-  {
-    id: 2,
-    text: "Job Application",
-    isOpen: false,
-    subItems: [
-      { id: 1, text: "John Doe", url: "/job/john-doe" },
-      { id: 2, text: "James Bond", url: "/job/james-bond" },
-    ],
-  },
-  {
-    id: 3,
-    text: "Qualifications",
-    isOpen: false,
-    subItems: [
-      { id: 1, text: "John Doe", url: "/job/john-doe" },
-      { id: 2, text: "James Bond", url: "/job/james-bond" },
-    ],
-  },
-  {
-    id: 4,
-    text: "About",
-    url: "/about",
-  },
-  {
-    id: 5,
-    text: "Contact",
-    url: "/contact",
-  },
-];
 
 export const useNavigationStore = create<NavigationStore>((set) => ({
   sidebarItems: initialSidebarItems,
 
+  saveItems: (newItems: SidebarMainItem[]) => set({ sidebarItems: newItems }),
   handleItemClick: (id: number) => {
     set((state) => {
       return {
