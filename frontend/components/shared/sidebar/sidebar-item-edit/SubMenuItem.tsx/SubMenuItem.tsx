@@ -2,7 +2,11 @@ import React, { useCallback, useRef, useState } from "react";
 import update from "immutability-helper";
 import { cn } from "@/lib/utils";
 import Drag from "@/components/shared/icons/Drag";
-import { SidebarBaseItem, SidebarMainItem } from "@/store/useNavigationStore";
+import {
+  SidebarBaseItem,
+  SidebarMainItem,
+  useNavigationStore,
+} from "@/store/useNavigationStore";
 import ActionBtns from "../action-btns/ActionBtns";
 import Text from "../text/Text";
 import { DragSourceMonitor, useDrag, useDrop } from "react-dnd";
@@ -29,6 +33,7 @@ const SubMenuItem = ({
   setLocalItems,
   index,
 }: SubMenuItemProps) => {
+  const { reportAnalytics } = useNavigationStore();
   const { id, showItem } = item;
   const ref = useRef<HTMLDivElement>(null);
   const [isEditingText, setIsEditingText] = useState(false);
@@ -50,8 +55,9 @@ const SubMenuItem = ({
             : item
         )
       );
+      reportAnalytics({ id, from: dragIndex, to: hoverIndex });
     },
-    [parentItem.id, setLocalItems]
+    [id, parentItem.id, reportAnalytics, setLocalItems]
   );
 
   const [{ handlerId }, drop] = useDrop<
@@ -117,7 +123,7 @@ const SubMenuItem = ({
         <Drag width={30} height={30} fill={showItem ? undefined : "#CDCDCD"} />
       </button>
       <Text
-        text={item.text}
+        text={item.title}
         isEditingText={isEditingText}
         onChange={(e) =>
           setNewItem({
@@ -126,12 +132,13 @@ const SubMenuItem = ({
               ...parentItem,
               subItems: parentItem.subItems?.map((subItem) =>
                 subItem.id === item.id
-                  ? { ...subItem, text: (e.target as HTMLInputElement).value }
+                  ? { ...subItem, title: (e.target as HTMLInputElement).value }
                   : subItem
               ),
             },
           })
         }
+        showItem={showItem}
       />
       <ActionBtns
         setIsEditingText={setIsEditingText}

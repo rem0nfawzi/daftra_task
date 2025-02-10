@@ -2,13 +2,18 @@ import React from "react";
 import Settings from "../../icons/Settings";
 import Check from "../../icons/Check";
 import Exit from "../../icons/Exit";
-import { SidebarItem, useNavigationStore } from "@/store/useNavigationStore";
+import {
+  SidebarMainItem,
+  useNavigationStore,
+} from "@/store/useNavigationStore";
+import { cn } from "@/lib/utils";
+import BackArrow from "../../icons/BackArrow";
 
 interface ActionBtnsProps {
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  localItems: SidebarItem[];
-  setLocalItems: React.Dispatch<React.SetStateAction<SidebarItem[]>>;
+  localItems: SidebarMainItem[];
+  setLocalItems: React.Dispatch<React.SetStateAction<SidebarMainItem[]>>;
 }
 const ActionBtns = ({
   isEditing,
@@ -16,10 +21,34 @@ const ActionBtns = ({
   localItems,
   setLocalItems,
 }: ActionBtnsProps) => {
-  const { sidebarItems, saveItems } = useNavigationStore();
+  const { sidebarItems, saveItems, setDisplaySidebarOnMobile } =
+    useNavigationStore();
   return (
-    <div className="flex items-center justify-between px-[42px] py-[34px] border-b border-gray-100">
-      <p className="text-2xl text-gray-500 font-medium capitalize">Menu</p>
+    <div
+      className={cn(
+        "flex items-center justify-between p-4 border-b border-gray-100",
+        "md:px-[42px] md:py-[34px]"
+      )}
+    >
+      <div className="flex items-center gap-2">
+        <button
+          className="md:hidden"
+          onClick={() => {
+            setDisplaySidebarOnMobile(false);
+            setIsEditing(false);
+          }}
+        >
+          <BackArrow width={16} height={15} />
+        </button>
+        <p
+          className={cn(
+            "text-lg text-gray-500 font-medium capitalize",
+            "md:text-2xl"
+          )}
+        >
+          Menu
+        </p>
+      </div>
       {!isEditing && (
         <button
           onClick={() => {
@@ -27,7 +56,11 @@ const ActionBtns = ({
             setLocalItems(sidebarItems);
           }}
         >
-          <Settings width={30} height={30} />
+          <Settings
+            width={30}
+            height={30}
+            className="w-[26px] h-[26px] md:w-[30px] md:h-[30px]"
+          />
         </button>
       )}
       {isEditing && (
@@ -38,10 +71,21 @@ const ActionBtns = ({
               setIsEditing(false);
             }}
           >
-            <Check width={43} height={43} />
+            <Check
+              width={43}
+              height={43}
+              className="w-[34px] h-[34px] md:w-[43px] md:h-[43px]"
+            />
           </button>
-          <button onClick={() => setIsEditing(false)}>
-            <Exit width={43} height={43} />
+          <button
+            onClick={() => setIsEditing(false)}
+            className="hidden md:block"
+          >
+            <Exit
+              width={43}
+              height={43}
+              className="w-[34px] h-[34px] md:w-[43px] md:h-[43px]"
+            />
           </button>
         </div>
       )}

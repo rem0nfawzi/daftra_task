@@ -3,36 +3,38 @@ import { cn } from "@/lib/utils";
 import React, { FC, useCallback } from "react";
 import ArrowBottom from "../../icons/ArrowBottom";
 import {
-  SidebarItem as SidebarItemType,
+  SidebarMainItem as SidebarItemType,
   useNavigationStore,
 } from "@/store/useNavigationStore";
 import { useRouter } from "next/navigation";
 
 const SidebarItem: FC<SidebarItemType> = ({
   id,
-  text,
+  title,
   isOpen,
-  url,
+  target,
   subItems,
 }) => {
   const router = useRouter();
   const { handleItemClick } = useNavigationStore();
   const handleClick = useCallback(
     (id: number, url?: string) => {
-      if (url) router.push(url);
+      if ((!subItems || subItems.length === 0) && url) router.push(url);
       else handleItemClick(id);
     },
-    [handleItemClick, router]
+    [handleItemClick, router, subItems]
   );
   return (
     <>
       <button
         className={cn(
-          "w-full bg-gray-200 px-[30px] py-[19px] rounded-sm text-gray-500 text-2xl font-medium mb-3.5 flex items-center justify-between"
+          "w-full bg-gray-200 px-[25px] py-[16px] rounded-sm text-gray-500 text-sm font-medium mb-3 flex items-center justify-between",
+          isOpen && "mb-0",
+          "md:px-[30px] md:py-[19px] md:text-2xl md:mb-3.5"
         )}
-        onClick={() => handleClick(id, url)}
+        onClick={() => handleClick(id, target)}
       >
-        {text}
+        {title}
         {!!subItems?.length && (
           <ArrowBottom
             width={24}
@@ -42,17 +44,18 @@ const SidebarItem: FC<SidebarItemType> = ({
         )}
       </button>
       {subItems && isOpen && (
-        <div className="flex flex-col gap-3.5">
+        <div className={cn("flex flex-col gap-0", "md:gap-3.5")}>
           {subItems.map(
             (item) =>
               item.showItem && (
                 <button
                   key={item.id}
                   className={cn(
-                    "text-gray-500 text-xl py-3 mx-6 px-6 rounded-sm text-left mb-3.5 transition hover:bg-gray-200"
+                    "text-gray-500 text-sm px-[25px] py-[16px] mx-6 rounded-sm text-left mb-1 transition hover:bg-gray-200",
+                    "md:text-xl md:px-[30px] md:py-[19px] md:mb-3.5 "
                   )}
                 >
-                  {item.text}
+                  {item.title}
                 </button>
               )
           )}

@@ -1,9 +1,10 @@
 import ArrowBottom from "@/components/shared/icons/ArrowBottom";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 const Sorting = () => {
   return (
-    <div className="flex justify-end mb-9">
+    <div className={cn("hidden mb-9", "md:flex md:justify-end")}>
       <div className="flex">
         <p className="text-gray-500 mr-4">Sorting by: </p>
         <button className="text-primary-300 flex items-center">

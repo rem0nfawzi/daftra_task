@@ -6,7 +6,12 @@ interface TagProps {
 }
 const Tag = ({ text }: TagProps) => {
   return (
-    <span className={cn("bg-gray-200 rounded-sm py-1 px-[18px] text-gray-600")}>
+    <span
+      className={cn(
+        "bg-gray-200 rounded-sm py-0.5 px-2 text-xs text-gray-600",
+        "md:text-base md:py-1 md:px-[18px]"
+      )}
+    >
       {text}
     </span>
   );

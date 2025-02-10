@@ -14,6 +14,7 @@ export interface NavItemProps {
   label: string;
   url?: string;
   hasDivider?: boolean;
+  isProfileButton?: boolean;
 }
 
 const items: NavItemProps[] = [
@@ -56,12 +57,13 @@ const items: NavItemProps[] = [
         alt="User name"
       />
     ),
+    isProfileButton: true,
     label: "Profile",
   },
 ];
 const NavItems = () => {
   return (
-    <nav className="flex gap-[58px]">
+    <nav className="gap-[58px] hidden lg:flex">
       {items.map((item) => (
         <Fragment key={item.label}>
           <Item
@@ -69,6 +71,7 @@ const NavItems = () => {
             icon={item.icon}
             label={item.label}
             url={item.url}
+            isProfileButton={item.isProfileButton}
           />
           {item.hasDivider && (
             <Divider

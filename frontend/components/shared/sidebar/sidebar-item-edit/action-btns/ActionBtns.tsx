@@ -16,13 +16,25 @@ const ActionBtns = ({
   return (
     <div className="flex items-center gap-2.5 ml-auto">
       <button onClick={() => setIsEditingText((prev) => !prev)}>
-        <Edit width={25} height={25} />
+        <Edit
+          width={25}
+          height={25}
+          className="w-[18px] h-[18px] md:w-[25px] md:h-[25px]"
+        />
       </button>
       <button onClick={onEyeClick}>
         {showItem ? (
-          <Eye width={25} height={25} />
+          <Eye
+            width={25}
+            height={25}
+            className="w-[18px] h-[18px] md:w-[25px] md:h-[25px]"
+          />
         ) : (
-          <EyeSlash width={25} height={25} />
+          <EyeSlash
+            width={25}
+            height={25}
+            className="w-[18px] h-[18px] md:w-[25px] md:h-[25px]"
+          />
         )}
       </button>
     </div>

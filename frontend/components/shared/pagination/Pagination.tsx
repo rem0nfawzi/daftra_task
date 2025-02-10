@@ -1,13 +1,14 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { cn } from "@/lib/utils";
 
 export default function PaginationRounded() {
   return (
-    <div className="mt-9">
+    <div className={cn("mt-4", "md-mt-9")}>
       <Stack spacing={2} alignItems="center">
         <Pagination
-          count={10}
+          count={4}
           variant="outlined"
           shape="rounded"
           size="large"

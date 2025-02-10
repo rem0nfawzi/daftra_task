@@ -23,11 +23,32 @@ export default {
           100: "#E9E9E9",
           200: "#F7F7F7",
           300: "#F0F0F0",
+          400: "#D8D8D8",
           500: "#404040",
           600: "#707070",
         },
+        bgGray: {
+          100: "#faffff",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      keyframes: {
+        sidebarMenuAnimation: {
+          "0%": {
+            display: "block",
+            opacity: "0",
+            left: "-30px",
+          },
+          "100%": {
+            opacity: "1",
+            left: "0",
+          },
+        },
+      },
+      animation: {
+        sidebarMenuAnimation:
+          "sidebarMenuAnimation .2s .2s ease-in-out 1 forwards",
       },
     },
   },

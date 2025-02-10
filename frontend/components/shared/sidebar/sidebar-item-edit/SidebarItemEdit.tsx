@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   SidebarMainItem as SidebarItemType,
   SidebarMainItem,
+  useNavigationStore,
 } from "@/store/useNavigationStore";
 import Drag from "../../icons/Drag";
 import SubMenuItem from "./SubMenuItem.tsx/SubMenuItem";
@@ -28,7 +29,8 @@ const SidebarItemEdit: FC<SidebarItemEditProps> = ({
   setLocalItems,
   index,
 }) => {
-  const { id, text, showItem, subItems } = item;
+  const { reportAnalytics } = useNavigationStore();
+  const { id, title, showItem, subItems } = item;
   const setNewItem = ({
     id,
     newItem,
@@ -53,8 +55,9 @@ const SidebarItemEdit: FC<SidebarItemEditProps> = ({
           ],
         })
       );
+      reportAnalytics({ id: item.id, from: dragIndex, to: hoverIndex });
     },
-    [setLocalItems]
+    [item.id, reportAnalytics, setLocalItems]
   );
 
   const [{ handlerId }, drop] = useDrop<
@@ -126,7 +129,8 @@ const SidebarItemEdit: FC<SidebarItemEditProps> = ({
       <div
         ref={ref}
         className={cn(
-          "w-full bg-gray-200 px-[30px] py-[19px] rounded-sm text-gray-500 text-2xl font-medium mb-3.5 flex items-center justify-between"
+          "w-full bg-gray-200 px-[26px] py-[19px] rounded-sm text-gray-500 text-2xl font-medium mb-3.5 flex items-center justify-between",
+          "md:px-[30px] md:py-[19px] "
         )}
         style={{ opacity }}
         data-handler-id={handlerId}
@@ -139,20 +143,22 @@ const SidebarItemEdit: FC<SidebarItemEditProps> = ({
               width={30}
               height={30}
               fill={showItem ? undefined : "#CDCDCD"}
+              className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]"
             />
           </button>
           <Text
-            text={text}
+            text={title}
             isEditingText={isEditingText}
             onChange={(e) =>
               setNewItem({
                 id,
                 newItem: {
                   ...item,
-                  text: (e.target as HTMLInputElement).value,
+                  title: (e.target as HTMLInputElement).value,
                 },
               })
             }
+            showItem={showItem}
           />
         </div>
         <ActionBtns

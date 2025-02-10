@@ -3,40 +3,40 @@ import { SidebarMainItem } from "./useNavigationStore";
 export const initialSidebarItems: SidebarMainItem[] = [
   {
     id: 1,
-    text: "Dashboard",
-    url: "/",
+    title: "Dashboard",
+    target: "/",
     showItem: true,
   },
   {
     id: 2,
-    text: "Job Application",
+    title: "Job Application",
     isOpen: false,
     showItem: true,
     subItems: [
-      { id: 1, text: "John Doe", url: "/", showItem: true },
-      { id: 2, text: "James Bond", url: "/", showItem: true },
+      { id: 1, title: "John Doe", target: "/", showItem: true },
+      { id: 2, title: "James Bond", target: "/", showItem: true },
     ],
   },
   {
     id: 3,
-    text: "Qualifications",
+    title: "Qualifications",
     isOpen: false,
     showItem: true,
     subItems: [
-      { id: 1, text: "John Doe", url: "/", showItem: true },
-      { id: 2, text: "James Bond", url: "/", showItem: true },
+      { id: 1, title: "John Doe", target: "/", showItem: true },
+      { id: 2, title: "James Bond", target: "/", showItem: true },
     ],
   },
   {
     id: 4,
-    text: "About",
-    url: "/",
+    title: "About",
+    target: "/",
     showItem: true,
   },
   {
     id: 5,
-    text: "Contact",
-    url: "/",
+    title: "Contact",
+    target: "/",
     showItem: true,
   },
 ];

@@ -22,18 +22,29 @@ const JobCard = ({ job }: Job) => {
     <Link
       href={url}
       className={cn(
-        "block relative bg-white border border-gray-300 rounded-[5px] py-[35px] transition hover:border-primary-300 mb-[14px] last-of-type:mb-0 hover:bg-primary-100"
+        "block relative bg-white border border-gray-300 rounded-[5px] py-[11px] transition hover:border-primary-300 mb-1.5 last-of-type:mb-0 hover:bg-primary-100",
+        "md:py-[35px] md:mb-[14px]"
       )}
     >
       <Favourite isFavourite={isFavourite} />
       <Employer image={image} title={title} location={location} />
       <Attributes attributes={attributes} />
-      <div className="flex gap-1 mb-[26.5px] px-[41px]">
+      <div
+        className={cn(
+          "flex gap-1 mb-2 px-[17px]",
+          "md:px-[41px] md:mb-[26.5px]"
+        )}
+      >
         {tags.map((tag) => (
           <Tag key={tag} text={tag} />
         ))}
       </div>
-      <p className="border-t border-gray-300 px-[41px] pt-[22.5px] text-gray-600 text-[17px]">
+      <p
+        className={cn(
+          "border-t border-gray-300 px-[17px] pt-[12px] text-gray-600 text-xs",
+          "md:px-[41px] md:pt-[22.5px] md-text-[17px]"
+        )}
+      >
         {category}
       </p>
     </Link>
